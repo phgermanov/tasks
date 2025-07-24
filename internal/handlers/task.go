@@ -23,6 +23,10 @@ type Task struct {
 	Repo TaskStore
 }
 
+func NewTask(repo TaskStore) *Task {
+	return &Task{Repo: repo}
+}
+
 func (h *Task) Create(w http.ResponseWriter, r *http.Request) {
 	var task models.Task
 	if err := json.NewDecoder(r.Body).Decode(&task); err != nil {

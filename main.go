@@ -20,7 +20,7 @@ func main() {
 	}
 	defer repo.Close()
 
-	taskHandler := &handlers.Task{Repo: repo}
+	taskHandler := handlers.NewTask(repo)
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /tasks", taskHandler.Get)
