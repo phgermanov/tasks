@@ -11,17 +11,16 @@ import (
 	"github.com/phgermanov/tasks/internal/models"
 )
 
-type TaskHandler interface {
+type TaskStore interface {
 	Create(ctx context.Context, task *models.Task) error
 	GetAll(ctx context.Context) ([]*models.Task, error)
 	GetByID(ctx context.Context, id int) (*models.Task, error)
 	Update(ctx context.Context, task *models.Task) error
 	Delete(ctx context.Context, id int) error
-	Close() error
 }
 
 type Task struct {
-	Repo TaskHandler
+	Repo TaskStore
 }
 
 func (h *Task) Create(w http.ResponseWriter, r *http.Request) {
